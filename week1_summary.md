@@ -15,33 +15,33 @@
 
 ```cpp
 //OCP 위배 구조 예제
+
 class Movable {
-  public:
-    void move();
-}
+public:
+	virtual void move() {};
+};
 
-class Train : public Movable{
-  public:
-    void move(){
-        cout << "선로를 통해 이동" << endl;
-    }
-}
-class Bus : public Movable{
-  public:
-    void move(){
-        cout << "도로를 통해 이동" << endl;
-    }
-}
+class Train : public Movable {
+public:
+	void move() override {
+		cout << "선로를 통해 이동" << endl;
+	}
+};
 
-class Client {
-    public:
-    static void main(String args[]){
-        Movable train = new Train();
-        Movable bus = new Bus();
+class Bus : public Movable {
+public:
+	void move() override {
+		cout << "도로를 통해 이동" << endl;
+	}
+};
 
-        train.move();
-        bus.move();
-    }
+int main()
+{
+	Movable* train = new Train();
+	Movable* bus = new Bus();
+
+	train->move();
+	bus->move();
 }
 ```
 
@@ -49,68 +49,78 @@ class Client {
 //전략패턴 예제
 //Strategy
 class MovableStrategy {
-  public:
-    void move();
-}
+public:
+	virtual void move() {};
+};
 
 //ConcreateStrategy
-class RailLoadStrategy : MovableStrategy{
-    public:
-    void move(){
-        cout << "선로를 통해 이동" << endl;
-    }
-}
+class RailLoadStrategy : public MovableStrategy {
+public:
+	RailLoadStrategy() {};
+	void move() override {
+		cout << "선로를 통해 이동" << endl;
+	}
+};
 
-class LoadStrategy : MovableStrategy{
-  public:
-    void move() {
-        cout << "도로를 통해 이동" << endl;
-    }
-}
+class LoadStrategy : public MovableStrategy {
+public:
+	LoadStrategy() {};
+	void move() override {
+		cout << "도로를 통해 이동" << endl;
+	}
+};
 
 class Moving {
-  public:
-    void move() {
-        movableStrategy.move();
-    }
-    void setMovableStrategy(MovableStrategy movableStrategy) {
-        this->movableStrategy = movableStrategy;
-    }
+public:
+	virtual ~Moving() {
+		delete movableStrategy;
+	}
+	void move() {
+		movableStrategy->move();
+	}
 
-  private:
-    MovableStrategy movableStrategy;
-}
+	void setMovableStrategy(MovableStrategy* movableStrategy) {
+		this->movableStrategy = movableStrategy;
+	}
 
-class Bus : Moving{
-  //..생략
-}
-class Train : Moving{
-  //..생략
-}
+private:
+	MovableStrategy* movableStrategy;
+};
+
+class Bus : public Moving {
+public:
+	Bus() {};
+	virtual ~Bus() {};
+};
+class Train : public Moving {
+public:
+	Train() {};
+	virtual ~Train() {};
+};
 
 //Context
-public class Client {
-    public static void main(String args[]){
-        Moving train = new Train();
-        Moving bus = new Bus();
+int main() {
+	Moving* train = new Train();
+	Moving* bus = new Bus();
 
-        /*
-            기존의 기차와 버스의 이동 방식
-            1) 기차 - 선로
-            2) 버스 - 도로
-         */
-        train.setMovableStrategy(new RailLoadStrategy());
-        bus.setMovableStrategy(new LoadStrategy());
+	/*
+		기존의 기차와 버스의 이동 방식
+		1) 기차 - 선로
+		2) 버스 - 도로
+	 */
+	train->setMovableStrategy(new RailLoadStrategy());
+	bus->setMovableStrategy(new LoadStrategy());
 
-        train.move();
-        bus.move();
+	train->move();
+	bus->move();
 
-        /*
-            선로를 따라 움직이는 버스가 개발
-         */
-        bus.setMovableStrategy(new RailLoadStrategy());
-        bus.move();
-    }
+	/*
+		선로를 따라 움직이는 버스가 개발
+	 */
+	bus->setMovableStrategy(new RailLoadStrategy());
+	bus->move();
+
+	return 0;
 }
 ```
 
