@@ -18,7 +18,6 @@
 
 ```cpp
 #include <map>
-using namespace stdext;
 
 class Observer {
 public:
