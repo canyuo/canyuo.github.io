@@ -17,14 +17,13 @@
 - 다수의 Observer 객체를 등록 이후 해지하지 않는다면 memory leak 이 발생 가능
 
 ```cpp
-
-#include<hash_map>
+#include <map>
 using namespace stdext;
 
 class Observer {
 public:
 	void receive(string& msg) {
-		cout << name + "에서 메시지를 받음 : " + msg;
+		cout << name + "에서 메시지를 받음 : " + msg << endl;
 	}
 
 public:
@@ -34,21 +33,21 @@ public:
 class User1 : public Observer {
 public:
 	User1(string name) {
-		name = name;
+		this->name = name;
 	}
 };
 
 class User2 : public Observer {
 public:
 	User2(string name) {
-		name = name;
+		this->name = name;
 	}
 };
 
 class Notice {
 public:
 	void attach(string name, Observer* observer) {
-		observers.insert(name, observer);
+		observers.insert(make_pair(name, observer));
 	}
 
 	// 옵저버에서 제거
@@ -58,13 +57,13 @@ public:
 
 	// 옵저버들에게 알림
 	void notifyObservers(string& msg) {
-		hash_map<string, Observer*>::iterator iter = observers.begin();
+		map<string, Observer*>::iterator iter = observers.begin();
 		for (; iter != observers.end(); iter++) {
 			iter->second->receive(msg);
 		}
 	}
 private:
-	hash_map<string, Observer*> observers;
+	map<string, Observer*> observers;
 };
 
 int main() {
