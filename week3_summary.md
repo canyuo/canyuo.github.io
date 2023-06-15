@@ -23,5 +23,62 @@
 2. 여러 요소들을 조합해서 사용하는 클래스 구조인 경우
  
 ```cpp
-//내용무
+public class BaseComponent implements Component
+{
+    @Override
+    public String add() {
+        // TODO Auto-generated method stub
+        return "에스프레소";
+    }
+}
+
+abstract public class Decorator implements Component {
+    private Component coffeeComponent;
+    
+    public Decorator(Component coffeeComponent) {
+        this.coffeeComponent = coffeeComponent;
+    }
+    
+    public String add() {
+        return coffeeComponent.add();
+    }
+}
+
+public class WaterDecorator extends Decorator {
+    public WaterDecorator(Component coffeeComponent) {
+        super(coffeeComponent);
+    }
+    
+    @Override
+    public String add() {
+        // TODO Auto-generated method stub
+        return super.add() + " + 물";
+    }
+}
+
+public class MilkDecorator extends Decorator {
+    public MilkDecorator(Component coffeeComponent) {
+        super(coffeeComponent);
+    }
+    
+    @Override
+    public String add() {
+        // TODO Auto-generated method stub
+        return super.add() + " + 우유";
+    }
+}
+
+public class Main {
+
+    public static void main(String[] args) {
+        Component espresso = new BaseComponent();
+        System.out.println("에스프레소 : " + espresso.add());
+        
+        Component americano = new WaterDecorator(new BaseComponent());
+        System.out.println("아메리카노 : " + americano.add());
+        
+        Component latte = new MilkDecorator(new WaterDecorator(new BaseComponent()));
+        System.out.println("라떼 : " + latte.add());
+    }
+}
 ```
