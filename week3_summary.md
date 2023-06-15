@@ -4,7 +4,7 @@
 - 정의 : 주어진 상황 및 용도에 따라 어떤 객체에 책임(기능)을 동적으로 추가하는 패턴
 - 기본 기능을 가지고 있는 클래스를 하나 만들어주고 추가할 수 있는 기능들을 추가하기 편하도록 설계하는 방식
 
-![01](https://github.com/canyuo/canyuo.github.io/blob/main/week2_image1.png)
+![01](https://github.com/canyuo/canyuo.github.io/blob/main/week3_image1.png)
 - Component : 실질적인 인스턴스를 컨트롤하는 역할
 - ConcreteComponent : Component의 실질적인 인스턴스의 부분으로 책임의 주체의 역할
 - Decorator : Component와 ConcreteDecorator를 동일시 하도록 해주는 역할
