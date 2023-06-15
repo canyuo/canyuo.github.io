@@ -23,62 +23,102 @@
 2. 여러 요소들을 조합해서 사용하는 클래스 구조인 경우
  
 ```cpp
-public class BaseComponent implements Component
-{
-    @Override
-    public String add() {
-        // TODO Auto-generated method stub
-        return "에스프레소";
-    }
-}
+class Component {
+public:
+	virtual void add(string& text) {};
+};
 
-abstract public class Decorator implements Component {
-    private Component coffeeComponent;
-    
-    public Decorator(Component coffeeComponent) {
-        this.coffeeComponent = coffeeComponent;
-    }
-    
-    public String add() {
-        return coffeeComponent.add();
-    }
-}
+class BaseComponent : public Component {
+public:
+	virtual void add(string& text) override {
+		text += "에스프레소";
+	}
+};
 
-public class WaterDecorator extends Decorator {
-    public WaterDecorator(Component coffeeComponent) {
-        super(coffeeComponent);
-    }
-    
-    @Override
-    public String add() {
-        // TODO Auto-generated method stub
-        return super.add() + " + 물";
-    }
-}
+class Decorator : public Component {
+public:
+	Decorator(Component* coffeeComponent)
+	{
+		this->coffeeComponent = coffeeComponent;
+	}
 
-public class MilkDecorator extends Decorator {
-    public MilkDecorator(Component coffeeComponent) {
-        super(coffeeComponent);
-    }
-    
-    @Override
-    public String add() {
-        // TODO Auto-generated method stub
-        return super.add() + " + 우유";
-    }
-}
+	virtual void add(string& text) override
+	{
+		coffeeComponent->add(text);
+	}
 
-public class Main {
+public:
+	Component* coffeeComponent;
+};
 
-    public static void main(String[] args) {
-        Component espresso = new BaseComponent();
-        System.out.println("에스프레소 : " + espresso.add());
-        
-        Component americano = new WaterDecorator(new BaseComponent());
-        System.out.println("아메리카노 : " + americano.add());
-        
-        Component latte = new MilkDecorator(new WaterDecorator(new BaseComponent()));
-        System.out.println("라떼 : " + latte.add());
-    }
+class WaterDecorator : public Decorator{
+public:
+	WaterDecorator(Component* coffeeComponent)
+		: Decorator(coffeeComponent)
+	{
+	}
+
+	virtual void add(string& text) override
+	{
+		__super::add(text);
+		text += " + 물";
+	}
+};
+
+class MilkDecorator : public Decorator{
+public:
+	MilkDecorator(Component* coffeeComponent)
+		: Decorator(coffeeComponent)
+	{
+	}
+
+	virtual void add(string& text) override
+	{
+		__super::add(text);
+		text += " + 우유";
+	}
+};
+
+class CaramelSyrupDecorator : public Decorator{
+public:
+	CaramelSyrupDecorator(Component* coffeeComponent)
+		: Decorator(coffeeComponent)
+	{
+	}
+
+	virtual void add(string& text) override
+	{
+		__super::add(text);
+		text += " + 캬라멜시럽";
+	}
+};
+
+int main() {
+	string recipe;
+	Component* espresso = new BaseComponent();
+	espresso->add(recipe);
+	cout << "에스프레소 : " << recipe << endl;
+
+	recipe.clear();
+	Component* americano = new WaterDecorator(new BaseComponent());
+	americano->add(recipe);
+	cout << "아메리카노 : " << recipe << endl;
+
+	recipe.clear();
+	Component* latte = new MilkDecorator(new BaseComponent());
+	latte->add(recipe);
+	cout << "라떼 : " << recipe << endl;
+
+	recipe.clear();
+	Component* caramelLatte = new CaramelSyrupDecorator(new MilkDecorator(new BaseComponent()));
+	caramelLatte->add(recipe);
+	cout << "캬라멜라떼 : " << recipe << endl;
+
+	delete espresso;
+	delete americano;
+	delete latte;
+	delete caramelLatte;
+
+	return 0;
 }
 ```
