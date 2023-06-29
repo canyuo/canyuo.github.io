@@ -63,3 +63,6 @@ int main()
 	return 0;
 }
 ```
+
+## 참고
+- 피닉스 싱글톤 패턴(phoenix singleton) : 파괴된 메모리가 다시 생성되는 싱글톤, 마이어스 싱글톤(singleton)의 한계를 극복하는 싱글톤
