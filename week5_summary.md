@@ -1,8 +1,10 @@
 # Week 5 / 싱글톤 패턴 (Singleton Pattern)
 
 ## 싱글톤 패턴
-- 정의 : 객체의 인스턴스가 오직 1개만 생성되는 패턴
+
 ![01](https://github.com/canyuo/canyuo.github.io/blob/main/week5_image1.png)
+
+- 정의 : 객체의 인스턴스가 오직 1개만 생성되는 패턴
 
 ## 사용이유 및 장점
 - 메모리 낭비 방지(최초 한번의 new연산자를 통해서 고정된 메모리 영역 사용)
