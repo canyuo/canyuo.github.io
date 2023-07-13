@@ -40,9 +40,9 @@ public:
 	static const string KAKAO_SECRET;
 };
 
-class InflearnAccount {
+class GoogleAccount {
 public:
-	InflearnAccount(string newEmail,string newPassword,string newUsername)
+	GoogleAccount(string newEmail,string newPassword,string newUsername)
 		: email(newEmail)
 		, password(newPassword)
 		, username(newUsername)
@@ -50,8 +50,8 @@ public:
 	}
 
 	string login() {
-		cout << "인프런 로그인 성공" << endl;
-		return email + INFLEARN_SECRET + password;
+		cout << "구글 로그인 성공" << endl;
+		return email + GOOGLE_SECRET + password;
 	}
 	string& getUsername(){	return username;	}
 
@@ -60,7 +60,7 @@ private:
 	string password;
 	string username;
 public:
-	static const string INFLEARN_SECRET;
+	static const string GOOGLE_SECRET;
 };
 
 //target
@@ -73,34 +73,34 @@ public:
 };
 
 const string KakaoAccount::KAKAO_SECRET = "KA_SECRET";
-const string InflearnAccount::INFLEARN_SECRET = "INF_SECRET";
+const string GoogleAccount::GOOGLE_SECRET = "GG_SECRET";
 
 // Adapter
-class InflearnSocialNetworkAuthAdapter : public SocialNetworkAuthTarget {
+class GoogleSocialNetworkAuthAdapter : public SocialNetworkAuthTarget {
 public:
-	InflearnSocialNetworkAuthAdapter(InflearnAccount* newInflearnAccount)
-	: inflearnAccount(newInflearnAccount)
+	GoogleSocialNetworkAuthAdapter(GoogleAccount* newGoogleAccount)
+	: googleAccount(newGoogleAccount)
 	{
 	}
 
 	virtual string getServiceName() override{
-		return "INFLEARN";
+		return "GOOGLE";
 	}
 	
 	virtual string getUserName() override {
-		return inflearnAccount->getUsername();
+		return googleAccount->getUsername();
 	}
 	
 	virtual string getSecret() override {
-		return InflearnAccount::INFLEARN_SECRET;
+		return GoogleAccount::GOOGLE_SECRET;
 	}
 	
 	virtual string getToken() override {
-		return inflearnAccount->login();
+		return googleAccount->login();
 	}
 
 private:
-	unique_ptr<InflearnAccount> inflearnAccount;
+	unique_ptr<GoogleAccount> googleAccount;
 };
 
 class KakaoSocialNetworkAuthAdapter : public SocialNetworkAuthTarget {
@@ -144,18 +144,18 @@ static SocialNetworkAuthTarget* getKakaoTarget() {
 	return new KakaoSocialNetworkAuthAdapter(new KakaoAccount("kakaoman", "kakaopassword", "kakaoman@kakao.com", "카카오한수"));
 }
 
-static SocialNetworkAuthTarget* getInflearnTarget() {
-	return new InflearnSocialNetworkAuthAdapter(new InflearnAccount("me@naver.com", "mypassword", "인프런한수"));
+static SocialNetworkAuthTarget* getGoogleTarget() {
+	return new GoogleSocialNetworkAuthAdapter(new GoogleAccount("me@naver.com", "mypassword", "구글한수"));
 }
 
 int main()
 {
 	unique_ptr<SocialNetworkAuthService> socialNetworkAuthService;
 	unique_ptr<SocialNetworkAuthTarget> kakaoAuth(getKakaoTarget());
-	unique_ptr<SocialNetworkAuthTarget> inflearnAuth(getInflearnTarget());
+	unique_ptr<SocialNetworkAuthTarget> googleAuth(getGoogleTarget());
 
 	socialNetworkAuthService->socialLogin(kakaoAuth.get());
-	socialNetworkAuthService->socialLogin(inflearnAuth.get());
+	socialNetworkAuthService->socialLogin(googleAuth.get());
 
 	return 0;
 }
