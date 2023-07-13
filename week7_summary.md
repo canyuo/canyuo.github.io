@@ -12,7 +12,6 @@
 - Client : 인터페이스인 Target 을 통해 이를 사용
 
 ```cpp
-
 class KakaoAccount {
 public:
 	KakaoAccount(string newId, string newPassword, string newName, string newEmail)
@@ -31,14 +30,14 @@ public:
 	string& getId(){	return id;	}
 	string& getName(){	return name;	}
 	string& getEmail(){	return email;	}
-	const string& getSecret(){	return KAKAO_SECRET;	}
 
 private:
 	string id;
 	string password;
 	string name;
 	string email;
-	const string KAKAO_SECRET = "KA_SECRET";
+public:
+	static const string KAKAO_SECRET;
 };
 
 class InflearnAccount {
@@ -55,13 +54,13 @@ public:
 		return email + INFLEARN_SECRET + password;
 	}
 	string& getUsername(){	return username;	}
-	const string& getSecret() { return INFLEARN_SECRET; }
 
 private:
 	string email;
 	string password;
 	string username;
-	const string INFLEARN_SECRET = "INF_SECRET";
+public:
+	static const string INFLEARN_SECRET;
 };
 
 //target
@@ -72,6 +71,9 @@ public:
 	virtual string getSecret() = 0;
 	virtual string getToken() = 0;
 };
+
+const string KakaoAccount::KAKAO_SECRET = "KA_SECRET";
+const string InflearnAccount::INFLEARN_SECRET = "INF_SECRET";
 
 // Adapter
 class InflearnSocialNetworkAuthAdapter : public SocialNetworkAuthTarget {
@@ -90,7 +92,7 @@ public:
 	}
 	
 	virtual string getSecret() override {
-		return inflearnAccount->getSecret();
+		return InflearnAccount::INFLEARN_SECRET;
 	}
 	
 	virtual string getToken() override {
@@ -117,7 +119,7 @@ public:
 	}
 	
 	virtual string getSecret() override {
-		return kakaoAccount->getSecret();
+		return KakaoAccount::KAKAO_SECRET;
 	}
 	
 	virtual string getToken() override {
