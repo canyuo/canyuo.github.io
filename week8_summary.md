@@ -106,17 +106,17 @@ int main()
 	shared_ptr<Computer> computer(new Computer());
 	shared_ptr<Light> light(new Light());
 	shared_ptr<Radio> radio(new Radio());
+	unique_ptr<HomeFacade> home(new HomeFacade(computer, light, radio));
 
 	// 이전 사용 방식
 	cout << "========집에 나갈때 파사드 적용 전==========" << endl;
 	computer->turnOff();
 	light->turnOff();
 	radio->turnOff();
-	//home->homeIn();
+	//home->homeOut();
 
 	// 파사드 패턴 적용 후 사용 방식
 	cout << "========집에 들어올때 파사드 적용 후==========" << endl;
-	unique_ptr<HomeFacade> home(new HomeFacade(computer, light, radio));
 	home->homeIn();
 
 	return 0;
