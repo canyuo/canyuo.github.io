@@ -1,6 +1,6 @@
 # Week 8 / 파사드패턴(FACADE PATTERN)
 
-## 어댑터 패턴
+## 어댑터 패턴(==Wrapper)
 - 정의 : 하위 시스템을 보다 쉽게 사용할 수 있게 해주는 고급 인터페이스를 정의
 ## Adapter 패턴 vs Facade 패턴 vs Decorator 패턴
 - Adapter 패턴 : 원래 코드를 다른 코드와 작동할 수 있게 래퍼를 제공
