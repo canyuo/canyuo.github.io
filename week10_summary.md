@@ -19,9 +19,10 @@
   - 복합구조가 너무 복잡하거나 많아져 많은 자원이 필요한 경우, 특정 작업에 대한 결과를 캐싱해 둘 수도 있음
     
 ![02](https://github.com/canyuo/canyuo.github.io/blob/main/week10_image2.jpg)
-- Base Component : 베이스 컴포넌트는 클라이언트가 composition 내의 오브젝트들을 다루기 위해 제공되는 인터페이스. 베이스 컴포넌트는 인터페이스 또는 추상 클래스로 정의되며 모든 오브젝트들에게 공통되는 메소드를 정의
-- Leaf : composition 내 오브젝트들의 행동을 정의. 이는 복합체를 구성하는 데 중요한 요소이며, 베이스 컴포넌트를 구현. 그리고 Leaf는 다른 컴포넌트에 대해 참조를 가지면 안됨
-- Composite : Leaf 객체들로 이루어져 있으며 베이스 컴포넌트 내 명령들을 구현
+- Object
+  - Base Component : 베이스 컴포넌트는 클라이언트가 composition 내의 오브젝트들을 다루기 위해 제공되는 인터페이스. 베이스 컴포넌트는 인터페이스 또는 추상 클래스로 정의되며 모든 오브젝트들에게 공통되는 메소드를 정의
+  - Leaf : composition 내 오브젝트들의 행동을 정의. 이는 복합체를 구성하는 데 중요한 요소이며, 베이스 컴포넌트를 구현. 그리고 Leaf는 다른 컴포넌트에 대해 참조를 가지면 안됨
+  - Composite : Leaf 객체들로 이루어져 있으며 베이스 컴포넌트 내 명령들을 구현
 
 ## Composite vs Decorator
 - Composite와 Decorator 패턴은 비슷한 구조를 갖고 있는데, 이 두 패턴 모두가 여러 객체를 조직화하기 위해 재귀적 합성 기법을 사용하기 때문
@@ -30,4 +31,91 @@
 - Composite 패턴 : 클래스의 구조화에 초점이 맞추어진 것으로서 어떻게 하면 관련된 객체들을 하나의 인터페이스로 다룰 수 있도록 일관성을 부여할 것인가가 중요한 관건
   
 ```cpp
+//Base Component
+class Shape {
+public:
+	virtual void draw(const string& fillColor) {};
+};
+
+//Leaf Objects
+class Triangle : public Shape {
+public:
+	virtual void draw(const string& fillColor) override
+	{
+		cout << "Drawing Triangle with color : " << fillColor << endl;
+	}
+};
+
+class Circle : public Shape {
+public:
+	virtual void draw(const string& fillColor) override
+	{
+		cout << "Drawing Circle with color : " << fillColor << endl;
+	}
+};
+
+#include <list> 
+//Composite Objects
+class Drawing : public Shape {
+public:
+	void draw(const string& fillColor)
+	{
+		for (shared_ptr<Shape> sh : shapes) {
+			sh->draw(fillColor);
+		}
+	}
+
+	//adding shape to drawing
+	void add(shared_ptr<Shape> s)
+	{
+		shapes.push_back(s);
+	}
+
+	//removing shape from drawing
+	void remove(shared_ptr<Shape> s)
+	{
+		shapes.remove(s);
+	}
+
+	//removing all the shapes
+	void clear()
+	{
+		cout << "Clearing all the shapes from drawing" << endl;
+		shapes.clear();
+	}
+
+private:
+	//collection of Shapes
+	list<shared_ptr<Shape>> shapes;
+};
+
+int main() {
+	shared_ptr<Shape> tri(new Triangle());
+	shared_ptr<Shape> tri1(new Triangle());
+	shared_ptr<Shape> cir(new Circle());
+	shared_ptr<Drawing> drawing(new Drawing());
+
+	drawing->add(tri1);
+	drawing->add(tri1);
+	drawing->add(cir);
+
+	const string colorRed = ("Red");
+	drawing->draw(colorRed);
+
+	///////////////////////////////
+	cout << endl;
+	///////////////////////////////
+
+	list<shared_ptr<Shape>> shapes;
+	shapes.push_back(drawing);
+	shapes.push_back(shared_ptr<Shape>(new Triangle()));
+	shapes.push_back(shared_ptr<Shape>(new Circle()));
+
+	const string colorGreen = ("Green");
+	for (shared_ptr<Shape> shape : shapes) {
+		shape->draw(colorGreen);
+	}
+	
+	return 0;
+}
 ```
