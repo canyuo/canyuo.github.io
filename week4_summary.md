@@ -14,7 +14,6 @@
 - ConcreteProduct : 제품 구현체
 
 ```cpp
-
 class Dough {
 public:
 	Dough() {};
