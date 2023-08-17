@@ -1,4 +1,4 @@
-# Week 3 / 데코레이터 패턴 (Decorator Pattern)
+# Week 3 / 데코레이터 패턴(Decorator Pattern)
 
 ## 데코레이터 패턴
 - 정의 : 주어진 상황 및 용도에 따라 어떤 객체에 책임(기능)을 동적으로 추가하는 패턴
