@@ -144,11 +144,11 @@ public:
 };
 
 static SocialNetworkAuthTarget* getKakaoTarget() {
-	return new KakaoSocialNetworkAuthAdapter(new KakaoAccount("kakaoman", "kakaopassword", "kakaoman@kakao.com", "카카오한수"));
+	return new KakaoSocialNetworkAuthAdapter(new KakaoAccount("kakaoman", "kakaopassword", "kakaoman@kakao.com", "카카오 한수"));
 }
 
 static SocialNetworkAuthTarget* getGoogleTarget() {
-	return new GoogleSocialNetworkAuthAdapter(new GoogleAccount("me@naver.com", "mypassword", "구글한수"));
+	return new GoogleSocialNetworkAuthAdapter(new GoogleAccount("me@naver.com", "mypassword", "구글 한수"));
 }
 
 int main()
