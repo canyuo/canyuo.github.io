@@ -44,6 +44,7 @@ public:
 	Real_Image(const string& newFileName)
 	{
 		fileName = newFileName;
+		loadFromDisk(fileName);
 	}
 
 	virtual void displayImage() override
@@ -93,3 +94,5 @@ int main() {
 	return 0;
 }
 ```
+![02](https://github.com/canyuo/canyuo.github.io/blob/main/week12_image2.png)
+
