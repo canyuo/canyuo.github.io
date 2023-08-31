@@ -34,52 +34,62 @@
     - 프록시 클래스에서 클라이언트가 주체 클래스에 대한 접근을 허용할지 말지 결정 가능
    
 ```cpp
-// Image.java
-public interface Image {
-    public void displayImage();
-}
-// Real_Image.java
-public class Real_Image implements Image {
-	private String fileName;
-    
-    public Real_Image(String fileName) {
-    	this.fileName = fileName;
-    }
-    
-    private void loadFromDisk(String fileName) {
-    	System.out.println("로딩: " + fileName);
-    }
-    
-    @Override
-    public void displayImage() {
-        System.out.println("보여주기: " + fileName);
-    }
-}
-// Proxy_Image.java
-public class Proxy_Image implements Image {
-    private String fileName;
-    private Real_Image realImage;
-    
-    public Proxy_Image(String fileName) {
-    	this.fileName = fileName;
-    }
-    
-    @Override
-    public void displayImage() {
-    	if (realImage == null) {
-        	realImage = new Real_Image(fileName);
-        }
-        realImage.displayImage();
-    }
-}
-// Proxy_Pattern.javva
-public class Proxy_Pattern {
-    public static void main(String args[]) {
-        Image image1 = new Proxy_Image("test1.jpg);
-        Image image2 = new Proxy_Image("test2.jpg);
-        
-        image1.displayImage();
-        image2.displayImage();
-    }
+class Image {
+public:
+	virtual void displayImage() = 0;
+};
+
+class Real_Image : public Image {
+public:
+	Real_Image(const string& newFileName)
+	{
+		fileName = newFileName;
+	}
+
+	virtual void displayImage() override
+	{
+		cout << "보여주기 : " << fileName << endl;
+	}
+
+private:
+	void loadFromDisk(string& loadFileName)
+	{
+		cout << "로딩 : " << loadFileName << endl;
+	}
+
+private:
+	string fileName;
+};
+
+class Proxy_Image : public Image
+{
+public:
+	Proxy_Image(const string& newFileName)
+	{
+		fileName = newFileName;
+	}
+
+	virtual void displayImage() override
+	{
+		if (nullptr == realImage) {
+			realImage.reset(new Real_Image(fileName));
+		}
+
+		realImage->displayImage();
+	}
+
+private:
+	string fileName;
+	shared_ptr<Real_Image> realImage;
+};
+
+int main() {
+	unique_ptr<Image> image1(new Proxy_Image("test1.jpg"));
+	unique_ptr<Image> image2(new Proxy_Image("test2.jpg"));
+
+	image1->displayImage();
+	image2->displayImage();
+
+	return 0;
 }
 ```
