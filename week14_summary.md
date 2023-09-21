@@ -1,4 +1,4 @@
-# Week 14 / 인터프리터 패턴 (Interpreter Pattern)
+# Week 14 / 인터프리터 패턴 (Interpreter Pattern, 바이트코드)
 
 ## 인터프리터 패턴 (Interpreter Pattern)
 - 정의
