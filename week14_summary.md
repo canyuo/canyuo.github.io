@@ -23,7 +23,6 @@
 
 
 ```cpp
-
 class Expression {
 public:
 	virtual ~Expression() {}
@@ -82,11 +81,11 @@ public:
 		char* str2 = NULL;
 		bool isPlus = false;
 		bool isMinus = false;
-		if (expression.find('+') > 0)
+		if (expression.find('+') != -1)
 		{
 			isPlus = true;
 		}
-		else if (expression.find('-') > 0)
+		else if (expression.find('-') != -1)
 		{
 			isMinus = true;
 		}
@@ -94,20 +93,14 @@ public:
 		str1 = strtok_s(expression.data(), "+-", &str2);
 		int a = atoi(str1);
 		int b = atoi(str2);
-		if (nullptr != str2)
+
+		if (isPlus)
 		{
-			if (isPlus)
-			{
-				expression_ = unique_ptr< Expression>(new AdditionExpression(new NumberExpression(a), new NumberExpression(b)));
-			}
-			else if (isMinus)
-			{
-				expression_ = unique_ptr< Expression>(new SubtractExpression(new NumberExpression(a), new NumberExpression(b)));
-			}
-			else
-			{
-				cout << "Error!!! operator!!" << endl;
-			}
+			expression_ = unique_ptr< Expression>(new AdditionExpression(new NumberExpression(a), new NumberExpression(b)));
+		}
+		else if (isMinus)
+		{
+			expression_ = unique_ptr< Expression>(new SubtractExpression(new NumberExpression(a), new NumberExpression(b)));
 		}
 		else
 		{
