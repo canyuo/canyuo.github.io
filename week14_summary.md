@@ -75,32 +75,21 @@ private:
 class ExpressionContext 
 {
 public:
-	ExpressionContext(string expression)
+	ExpressionContext(const string& expression)
 	{
-		char* str1 = NULL;
+		string copyExpression(expression);
 		char* str2 = NULL;
-		bool isPlus = false;
-		bool isMinus = false;
-		if (expression.find('+') != -1)
-		{
-			isPlus = true;
-		}
-		else if (expression.find('-') != -1)
-		{
-			isMinus = true;
-		}
-
-		str1 = strtok_s(expression.data(), "+-", &str2);
+		char* str1 = strtok_s(copyExpression.data(), "+-", &str2);
 		int a = atoi(str1);
 		int b = atoi(str2);
 
-		if (isPlus)
+		if (expression.find('+') != -1)
 		{
-			expression_ = unique_ptr< Expression>(new AdditionExpression(new NumberExpression(a), new NumberExpression(b)));
+			expression_ = unique_ptr<Expression>(new AdditionExpression(new NumberExpression(a), new NumberExpression(b)));
 		}
-		else if (isMinus)
+		else if (expression.find('-') != -1)
 		{
-			expression_ = unique_ptr< Expression>(new SubtractExpression(new NumberExpression(a), new NumberExpression(b)));
+			expression_ = unique_ptr<Expression>(new SubtractExpression(new NumberExpression(a), new NumberExpression(b)));
 		}
 		else
 		{
@@ -125,6 +114,7 @@ int main() {
 	expressionPlus.run();
 	expressionMinus.run();
 	expressionNum.run();
+
 	return 0;
 }
 ```
