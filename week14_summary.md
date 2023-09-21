@@ -51,8 +51,8 @@ public:
 	}
 
 private:
-	shared_ptr<Expression> left_;
-	shared_ptr<Expression> right_;
+	unique_ptr<Expression> left_;
+	unique_ptr<Expression> right_;
 };
 
 class SubtractExpression :public Expression {
@@ -68,8 +68,8 @@ public:
 	}
 
 private:
-	shared_ptr<Expression> left_;
-	shared_ptr<Expression> right_;
+	unique_ptr<Expression> left_;
+	unique_ptr<Expression> right_;
 };
 
 class ExpressionContext 
