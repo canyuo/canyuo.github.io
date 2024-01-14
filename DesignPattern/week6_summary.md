@@ -4,7 +4,7 @@
 - 정의 : 실행될 기능을 캡슐화함으로써 주어진 여러 기능을 실행할 수 있는 재사용성이 높은 클래스를 설계하는 패턴
 - 보통 매개변수를 이용해서 기능에 다른 요구 사항들을 넣을 수 있도록 작성
 
-![01](https://github.com/canyuo/canyuo.github.io/blob/main/week6_image1.png)
+![01](https://github.com/canyuo/canyuo.github.io/blob/main/DesignPattern/week6_image1.png)
 - Client : 커맨드를 실행하는 객체
 - Invoker(호출자) : 커맨드 실행 방법을 아는 객체
 - Receiver(수신자) : 실제 작업을 수행하는 객체
