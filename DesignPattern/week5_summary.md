@@ -2,7 +2,7 @@
 
 ## 싱글톤 패턴
 
-![01](https://github.com/canyuo/canyuo.github.io/blob/main/week5_image1.png)
+![01](https://github.com/canyuo/canyuo.github.io/blob/main/DesignPattern/week5_image1.png)
 
 - 정의 : 객체의 인스턴스가 오직 1개만 생성되는 패턴
 
