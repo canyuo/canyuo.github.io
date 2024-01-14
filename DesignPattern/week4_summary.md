@@ -5,7 +5,7 @@
 - 추상 팩토리 패턴 : 상속으로 객체 생성
 - 팩토리 메소드 패턴 : 객체 구성(Composition) 으로 객체 생성
   
-![01](https://github.com/canyuo/canyuo.github.io/blob/main/week4_image1.png)
+![01](https://github.com/canyuo/canyuo.github.io/blob/main/DesignPattern/week4_image1.png)
 - Creator : 최상위 공장 클래스로서, 팩토리 메서드를 추상화하여 서브 클래스로 하여금 구현하도로 함
 - 객체 생성 처리 메서드(someOperartion) : 객체 생성에 관한 전처리, 후처리를 템플릿화한 메소드
 - 팩토리 메서드(createProduct) : 서브 공장 클래스에서 재정의할 객체 생성 추상 메서드
