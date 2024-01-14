@@ -5,7 +5,7 @@
 - 주로 분산 이벤트 핸들링 시스템을 구현하는 데 사용
 - 발행/구독 모델
 
-![01](https://github.com/canyuo/canyuo.github.io/blob/main/week2_image1.png)
+![01](https://github.com/canyuo/canyuo.github.io/blob/main/DesignPattern/week2_image1.png)
 
 ## 장점
 - 상태를 변경하는 객체(publicher)와 변경을 감지하는 객체(subscriber)의 관계를 느슨하게 유지가능
