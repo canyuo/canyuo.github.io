@@ -8,7 +8,7 @@
 - 이미 존재하는 클래스의 인터페이스를 변경하고자 할때
 - 호환되지 않는 인터페이스를 가진 두 클래스를 함께 사용해야할 때
 - 
-![01](https://github.com/canyuo/canyuo.github.io/blob/main/week7_image1.png)
+![01](https://github.com/canyuo/canyuo.github.io/blob/main/DesignPattern/week7_image1.png)
 - Target : 변화에 대한 요구사항
 - Adaptee : 기존의 코드, Adaptee 가 가지고 있는 기능을 Adapter 가 주입받아 operation() 을 구현
 - Adapter : 변화에 대한 요구사항을 구현한 새로운 코드
