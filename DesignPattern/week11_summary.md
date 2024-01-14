@@ -4,7 +4,7 @@
 - 정의
   - 객체가 상태에 따라 행위를 다르게 할 때, 직접 상태를 체크하여 상태에 따른 행위를 호출하는 것이 아니라 상태를 객체화하여 필요에 따라 다르게 행동하도록 위임하는 디자인 패턴
   
-![01](https://github.com/canyuo/canyuo.github.io/blob/main/week11_image1.png)
+![01](https://github.com/canyuo/canyuo.github.io/blob/main/DesignPattern/week11_image1.png)
 - State Interface : 상태를 추상화한 고수준 모듈
 - ConcreteState : 구체적인 각각의 상태를 클래스로 표현. State 역할로 결정되는 인터페이스(API)를 구체적으로 구현함. 다음 상태가 결정되면 Context에 상태 변경을 요청하는 역할도 함
 - Context : State를 이용하는 시스템. 시스템 상태를 나타내는 State 객체를 합성(composition)하여 가지고 있음. 클라이언트로부터 요청받으면 State 객체에 행위 실행을 위임
