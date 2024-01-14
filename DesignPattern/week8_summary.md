@@ -10,7 +10,7 @@
 - Facade 패턴 : 원래 코드를 더 쉽게 처리 할 수 있는 래퍼를 제공
 - Decorator 패턴 : 인터페이스는 바꾸지 않고 책임(기능)만 추가
 
-![01](https://github.com/canyuo/canyuo.github.io/blob/main/week8_image1.png)
+![01](https://github.com/canyuo/canyuo.github.io/blob/main/DesignPattern/week8_image1.png)
 
 ```cpp
 
