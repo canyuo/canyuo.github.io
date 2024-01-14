@@ -19,7 +19,7 @@
    - 불완전한 솔루션 : 인터프리터 패턴만으로는 렉싱, 에러 핸들링, 최적화와 같은 케이스의 측면을 처리하기 어려울 수 있음
 
 
-![01](https://github.com/canyuo/canyuo.github.io/blob/main/week14_image1.png)
+![01](https://github.com/canyuo/canyuo.github.io/blob/main/DesignPattern/week14_image1.png)
 
 
 ```cpp
