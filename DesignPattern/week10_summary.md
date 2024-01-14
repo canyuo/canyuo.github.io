@@ -7,7 +7,7 @@
 - 여러 클래스에 공통되는 사항은 상위 추상 클래스에서 구현하고, 각각의 상세부분은 하위 클래스에서 구현
 - 코드의 중복을 줄이고, Refactoring에 유리한 패턴으로 상속을 통한 확장 개발 방법
   
-![01](https://github.com/canyuo/canyuo.github.io/blob/main/week10_image1.jpg)
+![01](https://github.com/canyuo/canyuo.github.io/blob/main/DesignPattern/week10_image1.jpg)
 
 ## 컴포지트(Composite) 패턴
 - 정의
@@ -18,7 +18,7 @@
   - 자식 간의 특별한 순서가 필요한 경우, 추가/제거/조회 시 더 복잡한 관리 방법을 사용해야함
   - 복합구조가 너무 복잡하거나 많아져 많은 자원이 필요한 경우, 특정 작업에 대한 결과를 캐싱해 둘 수도 있음
     
-![02](https://github.com/canyuo/canyuo.github.io/blob/main/week10_image2.jpg)
+![02](https://github.com/canyuo/canyuo.github.io/blob/main/DesignPattern/week10_image2.jpg)
 - Object
   - Base Component : 베이스 컴포넌트는 클라이언트가 composition 내의 오브젝트들을 다루기 위해 제공되는 인터페이스. 베이스 컴포넌트는 인터페이스 또는 추상 클래스로 정의되며 모든 오브젝트들에게 공통되는 메소드를 정의
   - Leaf : composition 내 오브젝트들의 행동을 정의. 이는 복합체를 구성하는 데 중요한 요소이며, 베이스 컴포넌트를 구현. 그리고 Leaf는 다른 컴포넌트에 대해 참조를 가지면 안됨
