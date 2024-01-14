@@ -7,7 +7,7 @@
   - 해당 객체가 메모리에 존재하지 않아도 기본적인 정보를 참조하거나 설정 가능
   - 실제 객체의 기능이 필요한 시점까지 객체의 생성을 미룰 수 있음
   
-![01](https://github.com/canyuo/canyuo.github.io/blob/main/week12_image1.png)
+![01](https://github.com/canyuo/canyuo.github.io/blob/main/DesignPattern/week12_image1.png)
 
 - 장점
   - 사이즈가 큰 객체가 로딩되기 전에도 프록시를 통해 참조 가능
@@ -94,5 +94,5 @@ int main() {
 	return 0;
 }
 ```
-![02](https://github.com/canyuo/canyuo.github.io/blob/main/week12_image2.png)
+![02](https://github.com/canyuo/canyuo.github.io/blob/main/DesignPattern/week12_image2.png)
 
