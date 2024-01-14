@@ -10,7 +10,7 @@
 2. 가상함수, 일반함수로 선언에 대한 결정이 필요
 3. 재정의 함수(virtual)의 수를 줄이는 것이 필요(virtual table 확장에 따른 perfomance 문제점 발생)
 
-![01](https://github.com/canyuo/canyuo.github.io/blob/main/week9_image1.png)
+![01](https://github.com/canyuo/canyuo.github.io/blob/main/DesignPattern/week9_image1.png)
 
 ```cpp
 //AbstractClass
